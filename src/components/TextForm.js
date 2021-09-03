@@ -1,0 +1,40 @@
+import React, { useState } from 'react'
+
+export default function TextForm(props) {
+  const [ text, setText ] = useState('');
+
+  let handleUpClick = () =>  {
+    let newText = text.toUpperCase();
+    setText(newText);  
+  }
+
+  let handleLowClick = () =>  { 
+    let newText = text.toLowerCase();
+    setText(newText);
+  }
+
+  let handleOnChange = (event) =>  {
+    console.log('Handle OnChange');
+    setText(event.target.value);
+  }
+
+  return (
+    <>
+      <div className="container mt-4">
+        <h1>{props.heading}</h1>
+        <div className="mb-3">
+          <textarea className="form-control my-3" value={text} onChange={handleOnChange} id="MyBox" rows="8"></textarea>
+        </div>
+        <button className="btn btn-primary mx-2" onClick={handleUpClick} >Convert to UpperCase</button>
+        <button className="btn btn-primary" onClick={handleLowClick} >Convert to Lowercase</button>
+      </div>
+      <div className="container my-3">
+        <h2>Your text summary</h2>
+        <p>{ text.split(" ").length } words and { text.length } characters</p>
+        <p>{ 0.008 * text.split(" ").length } minutes Read</p>
+        <h2>Preview</h2>
+        <p>{ text }</p>
+      </div>
+    </>
+  )
+}
